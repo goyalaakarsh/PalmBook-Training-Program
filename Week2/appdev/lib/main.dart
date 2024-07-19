@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Attendance List'),
+          title: Text('Contact List'),
         ),
         body: ContactList(),
       ),
@@ -38,22 +38,28 @@ class ContactList extends StatelessWidget {
       itemCount: attendees.length,
       itemBuilder: (context, index) {
         final attendee = attendees[index];
-        return ListTile(
-          leading: CircleAvatar(
-            child: Text(attendee['name']!.substring(0, 2)),
-          ),
-          title: Text(attendee['name']!),
-          subtitle: Text(attendee['phone']!),
-          trailing: Text(
-            attendee['status']!,
-            style: TextStyle(
-              color: attendee['status'] == 'Present'
-                  ? Colors.green
-                  : attendee['status'] == 'Absent'
-                      ? Colors.red
-                      : Colors.purple,
+
+        return Column(
+          children: <Widget>[
+            ListTile(
+              leading: CircleAvatar(
+                child: Text(attendee['name']!.substring(0, 2)),
+              ),
+              title: Text(attendee['name']!),
+              subtitle: Text(attendee['phone']!),
+              trailing: Text(
+                attendee['status']!,
+                style: TextStyle(
+                  color: attendee['status'] == 'Present'
+                      ? Colors.green
+                      : attendee['status'] == 'Absent'
+                          ? Colors.red
+                          : Colors.purple,
+                ),
+              ),
             ),
-          ),
+            Divider(), // Divider after each ListTile
+          ],
         );
       },
     );
